@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.example.springapp.model.User;
 import com.example.springapp.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,6 +31,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.File;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -95,8 +97,13 @@ class SpringappApplicationTests {
 					.andExpect(MockMvcResultMatchers.status().isOk())
 					.andReturn();
 
-			String token = result.getResponse().getContentAsString();
-			generatedToken = token;
+			String responseString = result.getResponse().getContentAsString();
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String, String> responseMap = mapper.readValue(responseString, Map.class);
+
+            String token = responseMap.get("token");
+            generatedToken = token;
+
 			assertNotNull(token);
 	}
 
@@ -112,8 +119,12 @@ class SpringappApplicationTests {
 					.andExpect(MockMvcResultMatchers.status().isOk())
 					.andReturn();
 
-			String token = result.getResponse().getContentAsString();
-			generatedToken = token;
+			String responseString = result.getResponse().getContentAsString();
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String, String> responseMap = mapper.readValue(responseString, Map.class);
+
+            String token = responseMap.get("token");
+            generatedToken = token;
 
 			assertNotNull(token);
 	
@@ -124,7 +135,6 @@ class SpringappApplicationTests {
 	void testCreateJob() throws Exception {
         testLoginAdmin();
 		String jobJson = "{\"jobTitle\":\"test\",\"department\":\"test\",\"location\":\"test\",\"responsibility\":\"test\",\"qualification\":\"test\",\"deadline\":\"2022-12-31T23:59:59.000+00:00\",\"category\":\"free\",\"amount\":\"100\"}";
-
 		mockMvc.perform(MockMvcRequestBuilders.post("/api/Job")
         	.header("Authorization", "Bearer " + generatedToken)
 			.contentType(MediaType.APPLICATION_JSON_VALUE)
