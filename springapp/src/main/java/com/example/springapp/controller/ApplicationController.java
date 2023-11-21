@@ -39,11 +39,6 @@ public class ApplicationController {
         return applicationService.createApplication(application);
     }
 
-    @GetMapping
-    public List<Application> getAllApplications() {
-        return applicationService.getAllApplications();
-    }
-
     @GetMapping("/{jobId}")
     public List<Application> getApplicationsByJob(@PathVariable Long jobId) {
         Job job = new Job();

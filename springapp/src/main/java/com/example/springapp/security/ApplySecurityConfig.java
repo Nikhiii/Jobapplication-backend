@@ -36,7 +36,7 @@ public class ApplySecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/auth/login").permitAll()
             .antMatchers("/auth/register").permitAll()
             .and().authorizeRequests().antMatchers("/api/Job/freeJobs","/api/Job/premiumJobs").hasAnyRole("ADMIN", "APPLICANT")
-			.and().authorizeRequests().antMatchers("/api/Job","/api/Job/*","/api/Applicant/ChangeStatus/*").hasRole("ADMIN")
+			.and().authorizeRequests().antMatchers("/api/Job","/api/Job/*","/api/Job/applicants","/api/Applicant/ChangeStatus/*").hasRole("ADMIN")
 			.and().authorizeRequests().antMatchers("/api/Applicant","/api/Applicant/*","/api/Applicant/getAlljob").hasRole("APPLICANT")
 			.anyRequest().authenticated()
 			.and().formLogin()

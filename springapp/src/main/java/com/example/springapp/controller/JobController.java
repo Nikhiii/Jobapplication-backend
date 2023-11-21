@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.springapp.model.Application;
 import com.example.springapp.model.Job;
 import com.example.springapp.model.Payment;
 import com.example.springapp.repository.PaymentRepository;
 import com.example.springapp.service.JobService;
+
+import com.example.springapp.service.ApplicationService;
 
 @RestController
 @RequestMapping("api/Job")
@@ -29,6 +32,9 @@ public class JobController {
     @Autowired
     private PaymentRepository paymentRepo;
 
+    @Autowired
+    private ApplicationService applicationService;
+
     @PostMapping
     public Job createJob(@RequestBody Job job) {
         return jobService.createJob(job);
@@ -37,6 +43,11 @@ public class JobController {
     @GetMapping
     public List<Job> getAllJobs() {
         return jobService.getAllJobs();
+    }
+
+    @GetMapping("/applicants")
+    public List<Application> getAllApplications() {
+        return applicationService.getAllApplications();
     }
 
     @GetMapping("/{jobTitle}")
