@@ -60,7 +60,7 @@ public class JobController {
         jobService.updateJob(id, job);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public void deleteJob(@PathVariable Long id) {
         jobService.deleteJob(id);
     }
@@ -75,12 +75,17 @@ public class JobController {
         return jobService.getPremiumJobs();
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteApplication(@PathVariable Long id) {
+        applicationService.deleteApplication(id);
+    }
 
     @GetMapping("/getPayments")
     public ResponseEntity<List<Payment>> getPayments() {
         List<Payment> payments = paymentRepo.findAll();
         return new ResponseEntity<List<Payment>>(payments, HttpStatus.OK);
     }
+
 
 
 }

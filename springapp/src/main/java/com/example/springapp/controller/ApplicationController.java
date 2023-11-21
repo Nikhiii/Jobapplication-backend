@@ -56,11 +56,6 @@ public class ApplicationController {
         applicationService.updateApplicationStatus(id, application.getStatus());
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteApplication(@PathVariable Long id) {
-        applicationService.deleteApplication(id);
-    }
-
 
      @PostMapping("/make-payment")
 	public ResponseEntity<String> savePayment(@RequestBody Payment a){
