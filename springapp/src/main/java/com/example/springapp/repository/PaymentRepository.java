@@ -8,6 +8,6 @@ import com.example.springapp.model.Payment;
 
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Long>{
-    List<Payment> findAllByUserId(Long userId);
+    // List<Payment> findAllByUserId(Long userId);
     
 }
