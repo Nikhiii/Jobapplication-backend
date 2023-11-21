@@ -19,6 +19,7 @@ import com.example.springapp.model.Job;
 import com.example.springapp.model.Payment;
 import com.example.springapp.repository.PaymentRepository;
 import com.example.springapp.service.ApplicationService;
+import com.example.springapp.service.JobService;
 
 @RestController
 @RequestMapping("api/Applicant")
@@ -29,6 +30,9 @@ public class ApplicationController {
 
     @Autowired
     private PaymentRepository paymentRepo;
+
+    @Autowired
+    private JobService jobService;
 
     @PostMapping
     public Application createApplication(@RequestBody Application application) {
@@ -72,4 +76,9 @@ public class ApplicationController {
 		}
 		return new ResponseEntity<>("Payment failure", HttpStatus.NOT_FOUND);
 	}
+
+    @GetMapping("/getAlljob")
+    public List<Job> getAllJobs() {
+        return jobService.getAllJobs();
+    }
 }
