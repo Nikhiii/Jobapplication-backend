@@ -60,7 +60,7 @@ public class JobController {
         jobService.updateJob(id, job);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteJob(@PathVariable Long id) {
         jobService.deleteJob(id);
     }
@@ -75,7 +75,7 @@ public class JobController {
         return jobService.getPremiumJobs();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public void deleteApplication(@PathVariable Long id) {
         applicationService.deleteApplication(id);
     }
