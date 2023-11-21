@@ -65,10 +65,10 @@ public class JobController {
     }
 
 
-   @GetMapping("/getPayment/{id}")
-    public ResponseEntity<Payment> getPayment(@PathVariable("id") Long id){
-        Payment payment = paymentRepo.findById(id).get();
-        return new ResponseEntity<Payment>(payment, HttpStatus.OK);
+    @GetMapping("/getPayments")
+    public ResponseEntity<List<Payment>> getPayments() {
+        List<Payment> payments = paymentRepo.findAll();
+        return new ResponseEntity<List<Payment>>(payments, HttpStatus.OK);
     }
 
 

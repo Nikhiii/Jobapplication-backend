@@ -72,5 +72,4 @@ public class ApplicationController {
 		}
 		return new ResponseEntity<>("Payment failure", HttpStatus.NOT_FOUND);
 	}
-
 }
