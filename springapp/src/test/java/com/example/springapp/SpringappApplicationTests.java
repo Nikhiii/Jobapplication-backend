@@ -89,7 +89,7 @@ class SpringappApplicationTests {
 	@Order(3)
 	public void testLoginUser() throws Exception {
 		testRegisterUser();
-			String requestBody = "{\"email\": \"abcd@gmail.com\", \"password\": \"abc\", \"userRole\": \"APPLICANT\"}";
+			String requestBody = "{\"email\": \"abcd@gmail.com\", \"password\": \"abc\"}";
 
 			MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/auth/login")
 					.contentType(MediaType.APPLICATION_JSON)
@@ -112,7 +112,7 @@ class SpringappApplicationTests {
     @Order(4)
     public void testLoginAdmin() throws Exception {
         testRegisterAdmin();
-        String requestBody = "{\"email\": \"abc@gmail.com\",\"password\": \"abc\", \"userRole\": \"ADMIN\"}";
+        String requestBody = "{\"email\": \"abc@gmail.com\",\"password\": \"abc\"}";
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/auth/login")
 					.contentType(MediaType.APPLICATION_JSON)
 					.content(requestBody))
@@ -214,9 +214,9 @@ class SpringappApplicationTests {
 
 	@Test
 	@Order(9)
-	void testGetApplication() throws Exception {
+	void testGetJob() throws Exception {
         testLoginUser();
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/Applicant")
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/Applicant/getAlljob")
         .header("Authorization", "Bearer " + generatedToken)
         .contentType(MediaType.APPLICATION_JSON)
 		.accept(MediaType.APPLICATION_JSON_VALUE))
@@ -226,9 +226,9 @@ class SpringappApplicationTests {
 
 	@Test
 	@Order(10)
-	void testGetAllApplications() throws Exception {
+	void testMakePayment() throws Exception {
         testLoginUser();
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/Applicant")
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/Applicant/make-payment")
         .header("Authorization", "Bearer " + generatedToken)
 		.contentType(MediaType.APPLICATION_JSON_VALUE)
         .accept(MediaType.APPLICATION_JSON_VALUE))
