@@ -12,7 +12,7 @@ public class CrosConfig implements WebMvcConfigurer {
 	 @Override
 	    public void addCorsMappings(CorsRegistry registry) {
 	        registry.addMapping("/**") // URL patterns to apply CORS configuration
-	            .allowedOrigins("http://localhost:8081") // Allowed origin URLs
+	            .allowedOrigins("http://localhost:8081","http://localhost:9876") // Allowed origin URLs
 	            .allowedMethods("GET", "POST", "PUT", "DELETE","OPTIONS") // Allowed HTTP methods
 	            .allowedHeaders("*")   // Allowed headers
             .allowCredentials(true);
