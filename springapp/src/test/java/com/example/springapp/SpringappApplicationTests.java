@@ -225,17 +225,26 @@ class SpringappApplicationTests {
 	}
 
 	@Test
-	@Order(10)
-	void testMakePayment() throws Exception {
+    @Order(10)
+    void testMakePayment() throws Exception {
         testLoginUser();
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/Applicant/make-payment")
-        .header("Authorization", "Bearer " + generatedToken)
-		.contentType(MediaType.APPLICATION_JSON_VALUE)
-        .accept(MediaType.APPLICATION_JSON_VALUE))
-		.andExpect(MockMvcResultMatchers.status().isOk())
-		.andReturn();	
-	}
-
+        String paymentJson = "{"
+            + "\"paymentID\": 1,"
+            + "\"paymentAmount\": 100,"
+            + "\"paymentDate\": \"2022-01-01\","
+            + "\"paymentStatus\": \"Paid\","
+            + "\"applicant\": {"
+                + "\"applicantID\": 1"
+            + "}"
+        + "}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/Applicant/make-payment")
+            .header("Authorization", "Bearer " + generatedToken)
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .content(paymentJson)
+            .accept(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andReturn();  
+    }
 
 	@Test
 	@Order(11)
@@ -288,6 +297,17 @@ class SpringappApplicationTests {
     void testGetPremiumJobsUser() throws Exception {
         testLoginUser();
         mockMvc.perform(MockMvcRequestBuilders.get("/api/Job/premiumJobs")
+        .header("Authorization", "Bearer " + generatedToken)
+        .contentType(MediaType.APPLICATION_JSON_VALUE))
+        .andExpect(MockMvcResultMatchers.status().isOk())
+        .andReturn();
+    }
+
+    @Test
+    @Order(16)
+    void testGetPayments() throws Exception {
+        testLoginAdmin();
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/Job/getPayments")
         .header("Authorization", "Bearer " + generatedToken)
         .contentType(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(MockMvcResultMatchers.status().isOk())
